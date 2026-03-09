@@ -5,4 +5,17 @@
 
 ---
 
-### Server Layer
+### Environment & UI
+
+-Isoview
+-POV Del juego
+
+---
+
+### Items and abilities
+
+---
+
+### Protocol
+
+---
