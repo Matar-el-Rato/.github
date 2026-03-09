@@ -1,7 +1,7 @@
 ### Physical Layer
 ---
 
-<img width="1299" height="930" alt="path68" src="https://github.com/user-attachments/assets/3b65d5b0-ef9e-4942-a305-be4649274ab0" />
+<img width="1299" height="930" alt="path68" src="https://github.com/user-attachments/assets/a666bfa4-b674-4dde-9bd9-41f91118ff19" />
 
 ---
 
