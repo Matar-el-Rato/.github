@@ -1,7 +1,7 @@
 ### Physical Layer
 ---
 
-<img width="2745" height="1782" alt="fossflow-export-2026-03-09T09_10_08 821Z" src="https://github.com/user-attachments/assets/d240f06f-1d24-4a84-8a3d-68c326c85092" />
+<img width="1299" height="930" alt="path68" src="https://github.com/user-attachments/assets/3b65d5b0-ef9e-4942-a305-be4649274ab0" />
 
 ---
 
