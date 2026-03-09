@@ -19,3 +19,10 @@
 ### Protocol
 
 ---
+
+### Credits
+
+- [sodaraptor](https://sodaraptor.itch.io/)
+- [elbolilloduro](https://elbolilloduro.itch.io/)
+- [binbun3d](https://binbun3d.itch.io/)
+- [ggbot](https://ggbot.itch.io/)
