@@ -1,31 +1,43 @@
-### Physical Layer
----
-
-<img width="1299" height="930" alt="path68" src="https://github.com/user-attachments/assets/a666bfa4-b674-4dde-9bd9-41f91118ff19" />
-
-url y puerto: bolty.website:8888 
-
+## Physical Layer
 
 ---
 
-### Environment & UI
-
--Isoview
--POV Del juego
+![Game Architecture Diagram](https://github.com/user-attachments/assets/a666bfa4-b674-4dde-9bd9-41f91118ff19)
 
 ---
 
-### Items and abilities
+## Environment & UI
+
+- **View:** Isometric view (Isoview)
+- **POV:** In-game point of view
 
 ---
 
-### Protocol
+## Items & Abilities
+
+* [Add items here]
+* [Add abilities here]
 
 ---
 
-### Credits
+## Protocol
 
-- [sodaraptor](https://sodaraptor.itch.io/)
-- [elbolilloduro](https://elbolilloduro.itch.io/)
-- [binbun3d](https://binbun3d.itch.io/)
-- [ggbot](https://ggbot.itch.io/)
+* [Add network/game protocols here]
+
+---
+
+## Credits
+
+* **[sodaraptor](https://sodaraptor.itch.io/)**
+* **[elbolilloduro](https://elbolilloduro.itch.io/)**
+* **[binbun3d](https://binbun3d.itch.io/)**
+* **[ggbot](https://ggbot.itch.io/)**
+
+---
+
+## Authors
+
+* **David Garcia**
+* **Eric Menaya**
+* **Xavi Guillamon**
+
