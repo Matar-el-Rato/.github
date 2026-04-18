@@ -38,6 +38,7 @@
 * **[ggbot](https://ggbot.itch.io/)**
 * **[arlez80](https://godotengine.org/asset-library/asset?user=arlez80)**
 * **[doctor-sci3nce](https://doctor-sci3nce.itch.io/)**
+* **[youpzdev](https://sketchfab.com/youpzdev)**
   
 ---
 
