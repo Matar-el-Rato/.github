@@ -77,13 +77,13 @@ At the start of each turn, Ophanim hangs a sword above the board on a thin rope.
 
 [IMAGES - items]
 
-| Item | Protocol name | Effect |
-|------|--------------|--------|
-| Handcuffs | `handcuffs` | Skip an opponent's next turn |
-| Fire Axe | `fire_axe` | Destroy one enemy barrier |
-| Magnifying Glass | `magnifying_glass` | Peek at the dice result before rolling |
-| Cigarette | `cigarette` | Reroll the current dice |
-| Makarov | `gun` | Shoot a target — ignores safe squares (Russian roulette) |
+| Item | Protocol name | Effect | Image | 
+|------|--------------|--------|--------|
+| Handcuffs | `handcuffs` | Skip an opponent's next turn | yo |
+| Fire Axe | `fire_axe` | Destroy one enemy barrier | yo |
+| Magnifying Glass | `magnifying_glass` | Peek at the dice result before rolling | yo |
+| Cigarette | `cigarette` | Reroll the current dice | yo |
+| Makarov | `gun` | Shoot a target — ignores safe squares (Russian roulette) | yo |
 
 Items are acquired through the golden square roulette. A player can hold multiple items.
 
