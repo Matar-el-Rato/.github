@@ -2,6 +2,8 @@
 
 [IMAGES - game screenshot]
 
+<img width="512" height="540" alt="logo_gihub" src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" />
+
 A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice, move their four pieces around the board, and compete to be the first to get all four pieces to their goal. Each match is overseen by **Ophanim**, a supernatural dealer who presides over the initiative sequence, the golden square roulette, and the Sword of Damocles — a turn timer enforced by a falling blade.
 
 Source code: [github.com/Matar-el-Rato](https://github.com/Matar-el-Rato)  
