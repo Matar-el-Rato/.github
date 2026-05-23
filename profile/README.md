@@ -79,11 +79,11 @@ At the start of each turn, Ophanim hangs a sword above the board on a thin rope.
 
 | Item | Protocol name | Effect | Image | 
 |------|--------------|--------|--------|
-| Handcuffs | `handcuffs` | Skip an opponent's next turn | yo |
-| Fire Axe | `fire_axe` | Destroy one enemy barrier | yo |
-| Magnifying Glass | `magnifying_glass` | Peek at the dice result before rolling | yo |
-| Cigarette | `cigarette` | Reroll the current dice | yo |
-| Makarov | `gun` | Shoot a target — ignores safe squares (Russian roulette) | yo |
+| Handcuffs | `handcuffs` | Skip an opponent's next turn | <img width="256" height="256" alt="esposas" src="https://github.com/user-attachments/assets/af9cc6ae-30ac-44fe-8a3c-28752c83a3ac" /> |
+| Fire Axe | `fire_axe` | Destroy one enemy barrier | <img width="256" height="256" alt="hacha" src="https://github.com/user-attachments/assets/0e58c345-30f4-48a7-800a-aeeaddaf692f" /> |
+| Magnifying Glass | `magnifying_glass` | Peek at the dice result before rolling | <img width="256" height="256" alt="lupa" src="https://github.com/user-attachments/assets/686ccfb0-691f-46b3-951b-e556cdb84ca0" /> |
+| Cigarette | `cigarette` | Reroll the current dice | <img width="256" height="256" alt="cigs" src="https://github.com/user-attachments/assets/4cf76e80-085b-4033-817d-c3547a70837d" /> |
+| Makarov | `gun` | Shoot a target — ignores safe squares (Russian roulette) | <img width="256" height="256" alt="makarov" src="https://github.com/user-attachments/assets/58121435-910f-4634-9cd7-c0c432f1e1e5" /> |
 
 Items are acquired through the golden square roulette. A player can hold multiple items.
 
