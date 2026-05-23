@@ -89,21 +89,6 @@ Items are acquired through the golden square roulette. A player can hold multipl
 
 ---
 
-## Characters
-
-[IMAGES - characters]
-
-| Skin ID | Character |
-|---------|-----------|
-| 101 | Main Character (default) |
-| 102 | Killer |
-| 103 | Goth |
-| 104 | Clown |
-| 105 | Black Dude |
-| 106 | Female Police Officer |
-
----
-
 ## Protocol
 
 Server: `bolty.website:8888` (TCP)
