@@ -355,7 +355,7 @@ Server  → game_over       { action, reason:"race", winner_user_id }
 
 ---
 
-## Credits
+## Assets Credits
 
 - **[sodaraptor](https://sodaraptor.itch.io/)**
 - **[elbolilloduro](https://elbolilloduro.itch.io/)**
@@ -365,6 +365,12 @@ Server  → game_over       { action, reason:"race", winner_user_id }
 - **[doctor-sci3nce](https://doctor-sci3nce.itch.io/)**
 - **[youpzdev](https://sketchfab.com/youpzdev)**
 - **[pepperonijabroni](https://pepperonijabroni.itch.io/)**
+- claude :D
+
+## Music
+- **[Portal Radio OST](https://www.youtube.com/watch?v=mD3v1B_aXw0&list=RDmD3v1B_aXw0&start_radio=1)**
+- **[I'm not a Human OST](https://www.youtube.com/watch?v=flGJj6d1Q9M&list=RDflGJj6d1Q9M&start_radio=1)**
+- **[Buckshot Roulette General OST](https://www.youtube.com/watch?v=mvkcyB_lve0&list=RDmvkcyB_lve0&start_radio=1)**
 
 ---
 
