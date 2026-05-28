@@ -1,6 +1,17 @@
 # Matar el Rato
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Godot-4.6-478CBF?logo=godotengine&logoColor=white" alt="Godot 4.6" />
+  <img src="https://img.shields.io/badge/Client-C%23%20.NET-512BD4?logo=csharp&logoColor=white" alt="Client: C# .NET" />
+  <img src="https://img.shields.io/badge/Server-C-A8B9CC?logo=c&logoColor=white" alt="Server: C" />
+  <img src="https://img.shields.io/badge/DB-MySQL-4479A1?logo=mysql&logoColor=white" alt="Database: MySQL" />
+  <img src="https://img.shields.io/badge/Protocol-TCP-FF5B1F" alt="Protocol: TCP" />
+  <img src="https://img.shields.io/badge/Game Players-2--4-brightgreen" alt="Players: 2–4" />
+  <img src="https://img.shields.io/badge/Total Players-64-green" alt="Players: 2–4" />
+  <img src="https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white" alt="Platform: Windows" />
+</p>
+
+<p align="center">
   <a href="#physical-layer">Physical Layer</a> ·
   <a href="#environment--ui">Environment &amp; UI</a> ·
   <a href="#core-mechanics">Core Mechanics</a> ·
