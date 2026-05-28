@@ -1,5 +1,16 @@
 # Matar el Rato
 
+<p align="center">
+  <a href="#physical-layer">Physical Layer</a> ·
+  <a href="#environment--ui">Environment &amp; UI</a> ·
+  <a href="#core-mechanics">Core Mechanics</a> ·
+  <a href="#items--abilities">Items &amp; Abilities</a> ·
+  <a href="#protocol">Protocol</a> ·
+  <a href="#assets-credits">Assets Credits</a> ·
+  <a href="#music">Music</a> ·
+  <a href="#authors">Authors</a>
+</p>
+
 [IMAGES - game screenshot]
 
 <img width="128" height="130" alt="logo_gihub" src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" />
@@ -79,15 +90,17 @@ At the start of each turn, Ophanim hangs a sword above the board on a thin rope.
 
 [IMAGES - items]
 
-| Item | Protocol name | Effect | Image | 
-|------|--------------|--------|--------|
-| Handcuffs | `handcuffs` | Skip an opponent's next turn | <img width="256" height="256" alt="esposas" src="https://github.com/user-attachments/assets/af9cc6ae-30ac-44fe-8a3c-28752c83a3ac" /> |
-| Fire Axe | `fire_axe` | Destroy one enemy barrier | <img width="256" height="256" alt="hacha" src="https://github.com/user-attachments/assets/0e58c345-30f4-48a7-800a-aeeaddaf692f" /> |
-| Magnifying Glass | `magnifying_glass` | Peek at the dice result before rolling | <img width="256" height="256" alt="lupa" src="https://github.com/user-attachments/assets/686ccfb0-691f-46b3-951b-e556cdb84ca0" /> |
-| Cigarette | `cigarette` | Reroll the current dice | <img width="256" height="256" alt="cigs" src="https://github.com/user-attachments/assets/4cf76e80-085b-4033-817d-c3547a70837d" /> |
-| Makarov | `gun` | Shoot a target — ignores safe squares (Russian roulette) | <img width="256" height="256" alt="makarov" src="https://github.com/user-attachments/assets/58121435-910f-4634-9cd7-c0c432f1e1e5" /> |
+| Item | Protocol name | Effect | Status | Image |
+|------|---------------|--------|--------|-------|
+| Handcuffs | `handcuffs` | Skip an opponent's next turn | **Implemented** (client + server) | <img width="256" height="256" alt="esposas" src="https://github.com/user-attachments/assets/af9cc6ae-30ac-44fe-8a3c-28752c83a3ac" /> |
+| Cigarette | `cigarette` | Reroll the pending dice | **Implemented** (client + server) | <img width="256" height="256" alt="cigs" src="https://github.com/user-attachments/assets/4cf76e80-085b-4033-817d-c3547a70837d" /> |
+| Fire Axe | `fire_axe` | Destroy one enemy barrier | Stub — grab/return + safe consume-and-respawn scaffold in place; no use logic | <img width="256" height="256" alt="hacha" src="https://github.com/user-attachments/assets/0e58c345-30f4-48a7-800a-aeeaddaf692f" /> |
+| Magnifying Glass | `magnifying_glass` | Peek at the next dice result before rolling | Stub — safe consume-and-respawn scaffold in place; no use logic | <img width="256" height="256" alt="lupa" src="https://github.com/user-attachments/assets/686ccfb0-691f-46b3-951b-e556cdb84ca0" /> |
+| Makarov | `gun` | Russian-roulette shot at a target — ignores safe squares | Stub — grab/shoot/return + safe consume-and-respawn scaffold in place; gun is used by the initiative sequence | <img width="256" height="256" alt="makarov" src="https://github.com/user-attachments/assets/58121435-910f-4634-9cd7-c0c432f1e1e5" /> |
 
 Items are acquired through the golden square roulette. A player can hold multiple items.
+
+**Consume/respawn rule:** when an item is used, its scene node is NOT freed — it's reset to a hidden "fresh" pose (visible=false, transform restored). `PlayerItemSet.SpawnItem` resolves items by node name, so freeing the node would make any subsequent grant from the golden roulette fail with `'<ItemName>' not found in PlayerItemSet`. All five items follow this pattern via `BurnDisappear()` → `ResetToFresh()`.
 
 ---
 
@@ -273,34 +286,40 @@ Server  → dice_result     { action, user_id, die1, die2, total,
                            (empty moveable_pieces: server auto-skips)
 
 Client  → move_piece      { action, piece_id }
-Server  → piece_moved     { action, user_id, piece_id, from, to,
+Server  → piece_moved     { action, user_id, piece_id, from, to, steps,
                             is_exit:bool, on_safe_square:bool }
 
 
 -- Follow-up events (after piece_moved) --
 
 Server  → capture              { action, attacker_user_id, victim_user_id,
-                                 piece_id, square, bonus_moves:20 }
+                                 victim_piece_id, square, bonus_movements:20 }
 Server  → goal_scored          { action, user_id, piece_id,
-                                 pieces_in_goal:N, bonus_moves:10 }
+                                 pieces_in_goal:N, bonus_movements:10 }
 Server  → golden_square_event  { action, user_id, square,
-                                 result:"item"|"click", item:name|null }
-Server  → barrier_formed       { action, user_id, square }
-Server  → barrier_broken       { action, user_id, square }
+                                 spins:["gun"|"cigarette"|...|"reroll", ...],
+                                 final_item:"<one of the item names>" }
+Server  → barrier_formed       { action, user_id, square, piece_ids:[a,b] }
+Server  → barrier_broken       { action, user_id, square, reason:"moved" }
 
 
 -- Extra turn --
 
 Server  → extra_turn      { action, user_id, reason:"doubles"|
-                            "capture_bonus"|"goal_bonus", pending_moves:N }
+                            "capture_bonus"|"goal_bonus", pending_movements:N }
            doubles   → continues with new turn_start (same user_id)
-           bonus     → player moves pending_moves extra points
+           bonus     → player moves pending_movements extra points
+
+NOTE on the 5+X exit + capture case: the second die (X) is consumed BEFORE the
+capture bonus. The server emits dice_result(die1=X, die2=0) first; the
+extra_turn(capture_bonus, pending_movements=20) is fired after that move.
 
 
 -- Triple doubles penalty --
 
 Server  → triple_double_penalty { action, user_id, piece_id }
-Server  → life_lost             { action, user_id, lives_remaining }
+Server  → life_lost             { action, user_id, lives_remaining,
+                                  reason:"timeout"|"triple_double" }
 Server  → turn_end              { action, user_id, next_user_id }
 Server  → turn_start            { action, user_id }   ← next player
 
@@ -318,29 +337,75 @@ Server  → handcuff_skip   { action, user_id }
 
 -- Turn timer --
 
-Server  → turn_timer_warning  { action, seconds_remaining }
+Server  → turn_timer_warning  { action, user_id, seconds_remaining }
 Server  → turn_timer_expired  { action, user_id }
 
 
--- Item use --                                         [TOBEDONE - client UI]
-
-Client  → use_gun              { action }
-Server  → gun_available        { action }              (private)
-Server  → gun_result           { action, ... }
-
-Client  → use_cigarette        { action }
-Server  → cigarette_result     { action, die1, die2 }
-
-Client  → use_magnifying_glass { action }
-Server  → magnifying_glass_used { action }
-Server  → peek_result          { action, die1, die2 }  (private)
+-- Item use: Handcuffs (IMPLEMENTED) --
 
 Client  → use_handcuffs        { action, target_user_id }
-Server  → handcuffs_applied    { action, target_user_id }
+Server  → handcuffs_applied    { action, attacker_user_id, target_user_id }
+        Cuffs fly from the attacker's table spot to the target's head and hover
+        there until the target's next turn.
+
+        On the target's next advance_turn, the server emits handcuff_skip in place
+        of turn_start (see "Handcuff skip" above). Ophanim says "TOO BAD..." on
+        all clients; the cuffs burn off the target's head.
+
+
+-- Item use: Cigarette (IMPLEMENTED) --
+
+Client  → use_cigarette        { action }
+Server  → cigarette_result     { action, user_id, die1, die2, total,
+                                 moveable_pieces:[0-3,...] }
+        Replaces the pending dice. If moveable_pieces is empty:
+          - non-doubles → server auto-passes the turn (advance_turn) so the
+            player isn't stranded on the clock and the cubilete moves on.
+          - doubles     → extra_turn + new turn_start (reroll granted).
+        Ophanim says "FAIR ENOUGH." and shoots a reroll ray to the cup.
+
+
+-- Item use: Fire Axe (STUB) --                        [TOBEDONE - server + client]
 
 Client  → use_fire_axe         { action, target_square }
-Server  → fire_axe_available   { action }              (private)
-Server  → barrier_destroyed    { action, square }
+Server  → barrier_destroyed    { action, attacker_user_id, square,
+                                 freed_pieces:[{user_id, piece_id}, ...] }
+        Both pieces of the targeted enemy barrier are sent back home.
+        Consumes the axe.
+
+  Server-side stub: handle_use_fire_axe in game_actions.c.
+  Client-side stub: FireAxe.cs has grab/return + BurnDisappear() + ResetToFresh().
+                    Targeting UI (pick an enemy barrier square) is not implemented.
+
+
+-- Item use: Magnifying Glass (STUB) --                [TOBEDONE - server + client]
+
+Client  → use_magnifying_glass { action }
+Server  → magnifying_glass_used { action, user_id }           (public)
+Server  → peek_result           { action, die1, die2 }        (private — to peeker only)
+        Pre-rolls the next dice without committing them, so the peeker can decide
+        whether to use a Cigarette before the actual roll. Consumes the glass.
+
+  Server-side stub: handle_use_magnifying_glass in game_actions.c.
+  Client-side stub: MagnifyingGlass.cs has BurnDisappear() + ResetToFresh().
+                    No grab/peek UI yet.
+
+
+-- Item use: Makarov / gun (STUB) --                   [TOBEDONE - server + client]
+
+Client  → use_gun              { action, target_user_id }
+Server  → gun_result           { action, attacker_user_id, target_user_id,
+                                 result:"bang"|"click", lives_remaining:N }
+        Russian-roulette shot at a target, ignoring safe squares.
+          - "bang"  → target loses a life (life_lost follows; may trigger
+                      player_eliminated if lives_remaining == 0).
+          - "click" → nothing happens.
+        Consumes the gun.
+
+  Server-side stub: handle_use_gun in game_actions.c. (The gun IS used by the
+                    initiative sequence — that path is implemented.)
+  Client-side stub: Gun.cs has grab/shoot/return + BurnDisappear() + ResetToFresh().
+                    No target-selection UI yet.
 
 
 -- Player elimination --
