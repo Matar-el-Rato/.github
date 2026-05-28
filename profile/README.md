@@ -50,7 +50,7 @@ Latest video: [youtu.be/it1Uf9Nida0](https://youtu.be/it1Uf9Nida0)
 
 ### Turn Flow
 
-At the start of each turn the current player rolls two dice and moves one piece by the combined total. If no legal moves exist, the turn is skipped automatically. After the first piece moves anywhere in the match, a **60-second turn timer** begins. Warnings are broadcast at 30, 10, and 5 seconds remaining. If the timer expires, the Sword of Damocles falls.
+At the start of each turn the current player rolls two dice and moves one piece by the combined total. If no legal moves exist, the turn is skipped automatically. After the first piece moves anywhere in the match, a **30-second turn timer** begins. Warnings are broadcast at 30, 10, and 5 seconds remaining. If the timer expires, the Sword of Damocles falls.
 
 ### Board Layout
 
@@ -68,32 +68,51 @@ The board has an outer ring (squares 1–68) and four color-specific goal corrid
 **Universal safe squares:** 1, 12, 17, 29, 34, 46, 51, 63, 68
 
 ### Captures
-
+<img src="https://github.com/user-attachments/assets/4d28e0e6-4c21-4526-8264-c1fa971908a8" align="right" width="120" alt="Captures">
 Landing on a square occupied by an opponent's piece sends it back home. The attacker receives **20 bonus movement points**. Safe squares block captures.
+<br clear="all" />
+
+---
 
 ### Goals
-
+<img src="https://github.com/user-attachments/assets/963a9012-a0b0-4a37-a0d7-d8894944da45" align="right" width="120" alt="Goals">
 Getting a piece to its goal square earns **10 bonus movement points**. The first player to place all four pieces at the goal wins.
+<br clear="all" />
+
+---
 
 ### Barriers
-
+<img src="https://github.com/user-attachments/assets/b5fb9f75-f0fd-4b20-bcef-00fce3c09156" align="right" width="120" alt="Barriers">
 Two pieces of the same color on the same square form a barrier. Enemy pieces cannot land on or pass through a barrier. The barrier dissolves when one of its pieces moves away. A **Fire Axe** can destroy an enemy barrier directly.
+<br clear="all" />
+
+---
 
 ### Doubles
-
+<img src="https://github.com/user-attachments/assets/933dba40-9804-4a0d-a3eb-23e396975208" align="right" width="120" alt="Doubles">
 Rolling doubles grants a second roll. Three consecutive doubles triggers a penalty: the active piece is sent home and the player loses one life.
+<br clear="all" />
+
+---
 
 ### Lives
-
+<img src="https://github.com/user-attachments/assets/d1a404d7-c33e-4267-bee2-9ea5253719b1" align="right" width="120" alt="Lives">
 Each player starts with **3 lives**. Reaching zero lives eliminates that player from the match.
+<br clear="all" />
+
+---
 
 ### Golden Squares
-
+<img src="https://github.com/user-attachments/assets/bab4988e-a613-42f5-af8a-213f4ccee487" align="right" width="120" alt="Golden Squares">
 Each color quadrant has one golden square. Landing on it triggers a roulette spin presided over by Ophanim. The outcome is either an item grant or nothing ("click"). The Damocles sword is dismissed during this sequence and respawns on the next turn.
+<br clear="all" />
+
+---
 
 ### Sword of Damocles
-
-At the start of each turn, Ophanim hangs a sword above the board on a thin rope. The sword swings with spring physics throughout the turn as a visible countdown. If the 60-second timer expires, the rope is cut and the sword falls and impales the board. Once the next dice roll lands, the sword is dismissed. The timer only arms after the first piece move of the entire match, so it never runs during the opening Ophanim sequence.
+<img src="https://github.com/user-attachments/assets/b1c0426e-246c-48b5-a0a0-7744708fa63b" align="right" width="120" alt="Sword of Damocles">
+At the start of each turn, Ophanim hangs a sword above the board on a thin rope. The sword swings with spring physics throughout the turn as a visible countdown. If the 30-second timer expires, the rope is cut and the sword falls and impales the board. Once the next dice roll lands, the sword is dismissed. The timer only arms after the first piece move of the entire match, so it never runs during the opening Ophanim sequence.
+<br clear="all" />
 
 ---
 
