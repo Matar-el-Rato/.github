@@ -24,7 +24,7 @@
 
 <table>
   <tr>
-    <td width="50%" align="center">
+    <td width="100%" align="center">
       <img src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" width="100%" alt="Gameplay" /> 
     </td>
   </tr>
