@@ -36,7 +36,16 @@
       <img src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" width="35%" alt="Gameplay" /> 
     </td>
   </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/2f723882-1ca1-4878-aee8-45d460554c83" width="100%" alt="Image 3" />
+    </td>
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/f1f3723e-fa75-472b-9edd-b2570bff4961" width="100%" alt="Image 4" />
+    </td>
+  </tr>
 </table>
+
 
 A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice, move their four pieces around the board, and compete to be the first to get all four pieces to their goal. Each match is overseen by **Ophanim**, a supernatural dealer who presides over the initiative sequence, the golden square roulette, and the Sword of Damocles — a turn timer enforced by a falling blade.
 
