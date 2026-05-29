@@ -78,21 +78,21 @@ The board has an outer ring (squares 1–68) and four color-specific goal corrid
 
 ### Captures
 <img src="https://github.com/user-attachments/assets/4d28e0e6-4c21-4526-8264-c1fa971908a8" align="right" width="120" alt="Captures">
-Landing on a square occupied by an opponent's piece sends it back home. The attacker receives **20 bonus movement points**. Safe squares block captures.
+Landing on a square occupied by an opponent's piece sends it back home. The attacker receives 20 bonus movement points. Safe squares block captures.
 <br clear="all" />
 
 ---
 
 ### Goals
 <img src="https://github.com/user-attachments/assets/963a9012-a0b0-4a37-a0d7-d8894944da45" align="right" width="120" alt="Goals">
-Getting a piece to its goal square earns **10 bonus movement points**. The first player to place all four pieces at the goal wins.
+Getting a piece to its goal square earns 10 bonus movement points. The first player to place all four pieces at the goal wins.
 <br clear="all" />
 
 ---
 
 ### Barriers
 <img src="https://github.com/user-attachments/assets/b5fb9f75-f0fd-4b20-bcef-00fce3c09156" align="right" width="120" alt="Barriers">
-Two pieces of the same color on the same square form a barrier. Enemy pieces cannot land on or pass through a barrier. The barrier dissolves when one of its pieces moves away. A **Fire Axe** can destroy an enemy barrier directly.
+Two pieces of the same color on the same square form a barrier. Enemy pieces cannot land on or pass through a barrier. The barrier dissolves when one of its pieces moves away. A Fire Axe can destroy an enemy barrier directly.
 <br clear="all" />
 
 ---
@@ -106,7 +106,7 @@ Rolling doubles grants a second roll. Three consecutive doubles triggers a penal
 
 ### Lives
 <img src="https://github.com/user-attachments/assets/d1a404d7-c33e-4267-bee2-9ea5253719b1" align="right" width="120" alt="Lives">
-Each player starts with **3 lives**. Reaching zero lives eliminates that player from the match.
+Each player starts with 3 lives. Reaching zero lives eliminates that player from the match.
 <br clear="all" />
 
 ---
