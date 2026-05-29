@@ -149,7 +149,7 @@ Items are acquired through the golden square roulette. A player can hold multipl
 | **Cigarette** | `cigarette` | Reroll the pending dice | <img width="96" alt="cigarette" src="https://github.com/user-attachments/assets/4cf76e80-085b-4033-817d-c3547a70837d" /> |
 | **Fire Axe** | `fire_axe` | Destroy one enemy barrier | <img width="96" alt="fire axe" src="https://github.com/user-attachments/assets/0e58c345-30f4-48a7-800a-aeeaddaf692f" /> |
 | **Magnifying Glass** | `magnifying_glass` | Peek at the next dice result before rolling | <img width="96" alt="magnifying glass" src="https://github.com/user-attachments/assets/686ccfb0-691f-46b3-951b-e556cdb84ca0" /> |
-| **Makarov** | `gun` | Russian-roulette shot at a target — ignores safe squares | <img width="96" alt="makarov" src="https://github.com/user-attachments/assets/58121435-910f-4634-9cd7-c0c432f1e1e5" /> |
+| **Makarov** | `gun` | Russian-roulette shot at an enemy, might bite back | <img width="96" alt="makarov" src="https://github.com/user-attachments/assets/58121435-910f-4634-9cd7-c0c432f1e1e5" /> |
 
 ---
 
