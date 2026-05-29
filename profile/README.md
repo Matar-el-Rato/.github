@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="#physical-layer">Physical Layer</a> ·
-  <a href="#environment--ui">UI</a> ·
+  <a href="#ui">UI</a> ·
   <a href="#core-mechanics">Core Mechanics</a> ·
   <a href="#items--abilities">Items &amp; Abilities</a> ·
   <a href="#protocol">Protocol</a> ·
