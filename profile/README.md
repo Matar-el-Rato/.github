@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="#installation">Installation</a> ·
   <a href="#physical-layer">Physical Layer</a> ·
   <a href="#ui">UI</a> ·
   <a href="#core-mechanics">Core Mechanics</a> ·
@@ -46,6 +47,21 @@
 </table>
 
 A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice, move their four pieces around the board, and compete to be the first to get all four pieces to their goal. Each match is overseen by **Ophanim**, a supernatural dealer who presides over the initiative sequence, the golden square roulette, and the Sword of Damocles — a turn timer enforced by a falling blade.
+
+---
+
+## Installation
+
+The Windows client is packaged with **[Inno Setup](https://jrsoftware.org/isinfo.php)** as a single self-contained install wizard — no separate dependency folders and no need to have .NET installed; everything (game data and the .NET runtime) ships inside the package.
+
+**[➜ Download the latest release](https://github.com/Matar-el-Rato/MatarelRato-Godot/releases)**
+
+1. Grab `MatarElRato-Setup.exe` from the [Releases](https://github.com/Matar-el-Rato/MatarelRato-Godot/releases) page.
+2. Run it and follow the wizard (choose install location, optional desktop shortcut).
+3. Launch **Matar el Rato** from the Start Menu or desktop and log in.
+
+> The game connects to the live server automatically — just register or sign in and join a room.
+> Uninstall any time from **Settings → Apps** (or the Start Menu uninstall entry).
 
 ---
 
