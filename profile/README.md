@@ -1,5 +1,3 @@
-<img width="2113" height="700" alt="rect1" src="https://github.com/user-attachments/assets/ba38b2cb-b8d4-4b47-a40b-f292e1d9cd39" /># Matar el Rato
-
 <p align="center">
   <img src="https://img.shields.io/badge/Godot-4.6-478CBF?logo=godotengine&logoColor=white" alt="Godot 4.6" />
   <img src="https://img.shields.io/badge/Client-C%23%20.NET-512BD4?logo=csharp&logoColor=white" alt="Client: C# .NET" />
