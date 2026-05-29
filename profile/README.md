@@ -22,7 +22,7 @@
   <a href="#authors">Authors</a>
 </p>
 
-<table>
+<table align="center">
   <tr>
     <td width="100%" align="center">
       <img src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" width="100%" alt="Gameplay" /> 
