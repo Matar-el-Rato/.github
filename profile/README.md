@@ -15,6 +15,7 @@
   <a href="#core-mechanics">Core Mechanics</a> ·
   <a href="#items--abilities">Items &amp; Abilities</a> ·
   <a href="#protocol">Protocol</a> ·
+  <a href="#database">Database</a> ·
   <a href="#assets-credits">Assets Credits</a> ·
   <a href="#music">Music</a> ·
   <a href="#authors">Authors</a>
@@ -491,6 +492,65 @@ Server → player_eliminated  { action, user_id }
 Server → game_over          { action, reason:"race"|"elimination", winner_user_id }
 ```
 
+---
+
+## Database
+
+MySQL database `matarelrato-db`. Schema in [`utils/schema.sql`](utils/schema.sql).
+
+### `users`
+Permanent account data. Everyone starts at **500 points**; a win awards **+100**, a loss **−50** (floored at 0).
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `id` | INT, PK, auto-increment | |
+| `username` | VARCHAR(50), unique | |
+| `password_hash` | VARCHAR(256) | SHA-512 crypt |
+| `skin_id` | INT | character skin, default 101 |
+| `points` | INT | default 500, never below 0 |
+| `created_at` | TIMESTAMP | defaults to now |
+
+### `rooms`
+The three physical rooms. Exists only as the FK target for `matches.room_id`; capacity/occupancy is tracked in memory by the server.
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `id` | INT, PK | 1, 2, 3 |
+
+### `matches`
+One row per playthrough.
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `id` | INT, PK, auto-increment | |
+| `room_id` | INT, FK → `rooms.id` | |
+| `status` | ENUM | `WAITING` · `PLAYING` · `FINISHED` · `CANCELLED` |
+| `start_time` | TIMESTAMP | set when the match starts |
+| `end_time` | TIMESTAMP | set on finish/cancel |
+| `winner_id` | INT, FK → `users.id` | NULL until finished |
+
+### `match_participants`
+Links users to a match (PK `match_id` + `user_id`).
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `match_id` | INT, FK → `matches.id` | ON DELETE CASCADE |
+| `user_id` | INT, FK → `users.id` | |
+| `turn_order` | INT | seat / initiative order |
+| `chair_color` | VARCHAR(10) | chosen chair, NULL until picked |
+| `finish_position` | INT | 1 = winner; filled on finish/elimination |
+
+### `match_events`
+Append-only log of every in-game action (the protocol replay trail).
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `id` | BIGINT, PK, auto-increment | |
+| `match_id` | INT, FK → `matches.id` | ON DELETE CASCADE |
+| `user_id` | INT, FK → `users.id` | NULL for match-wide events |
+| `event_type` | VARCHAR(30) | action name (e.g. `dice_result`) |
+| `event_data` | JSON | full action payload |
+| `timestamp` | TIMESTAMP | defaults to now |
 
 ---
 
