@@ -24,8 +24,16 @@
 
 <table align="center">
   <tr>
-    <td width="100%" align="center">
-      <img src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" width="100%" alt="Gameplay" /> 
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/e5333bde-170a-4fde-bdc9-5540187c97e9" width="100%" alt="Image 1" />
+    </td>
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/f5174d2a-4f5c-4a7d-9c84-14689ab983f5" width="100%" alt="Image 2" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" width="35%" alt="Gameplay" /> 
     </td>
   </tr>
 </table>
