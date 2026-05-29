@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="#physical-layer">Physical Layer</a> ·
-  <a href="#environment--ui">Environment &amp; UI</a> ·
+  <a href="#environment--ui">UI</a> ·
   <a href="#core-mechanics">Core Mechanics</a> ·
   <a href="#items--abilities">Items &amp; Abilities</a> ·
   <a href="#protocol">Protocol</a> ·
@@ -25,15 +25,10 @@
 <table>
   <tr>
     <td width="50%" align="center">
-      <!-- Paste a screenshot here, e.g. <img src="PASTE_URL" width="100%" alt="Gameplay" /> -->
-    </td>
-    <td width="50%" align="center">
-      <!-- Paste a screenshot here, e.g. <img src="PASTE_URL" width="100%" alt="Gameplay" /> -->
+      <img src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" width="100%" alt="Gameplay" /> 
     </td>
   </tr>
 </table>
-
-<img width="128" height="130" alt="logo_gihub" src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" />
 
 A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice, move their four pieces around the board, and compete to be the first to get all four pieces to their goal. Each match is overseen by **Ophanim**, a supernatural dealer who presides over the initiative sequence, the golden square roulette, and the Sword of Damocles — a turn timer enforced by a falling blade.
 
@@ -45,18 +40,15 @@ A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice,
 
 ---
 
-## Environment & UI
-
-- **View:** Isometric view (Isoview)
-- **POV:** In-game point of view
+## UI
 
 <table>
   <tr>
     <td width="50%" align="center">
-      <!-- Paste an environment/UI shot here, e.g. <img src="PASTE_URL" width="100%" alt="Environment" /> -->
+      <img src="https://github.com/user-attachments/assets/1c2353c9-62fd-44dc-a78a-0b8849b1abb2" width="100%" alt="Environment" />
     </td>
     <td width="50%" align="center">
-      <!-- Paste an environment/UI shot here, e.g. <img src="PASTE_URL" width="100%" alt="UI" /> -->
+      <img src="https://github.com/user-attachments/assets/8a656567-4c17-4091-8d7b-060930fc99b5" width="100%" alt="UI" />
     </td>
   </tr>
 </table>
