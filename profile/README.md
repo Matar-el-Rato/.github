@@ -1,4 +1,4 @@
-# Matar el Rato
+<img width="2113" height="700" alt="rect1" src="https://github.com/user-attachments/assets/ba38b2cb-b8d4-4b47-a40b-f292e1d9cd39" /># Matar el Rato
 
 <p align="center">
   <img src="https://img.shields.io/badge/Godot-4.6-478CBF?logo=godotengine&logoColor=white" alt="Godot 4.6" />
@@ -33,7 +33,7 @@
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" width="35%" alt="Gameplay" /> 
+      <img src="https://github.com/user-attachments/assets/f634059e-0109-4745-98bd-fa5483d32e10" width="100%" alt="logo" /> 
     </td>
   </tr>
   <tr>
@@ -45,7 +45,6 @@
     </td>
   </tr>
 </table>
-
 
 A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice, move their four pieces around the board, and compete to be the first to get all four pieces to their goal. Each match is overseen by **Ophanim**, a supernatural dealer who presides over the initiative sequence, the golden square roulette, and the Sword of Damocles — a turn timer enforced by a falling blade.
 
