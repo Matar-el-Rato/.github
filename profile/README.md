@@ -330,169 +330,167 @@ Server → variable:
 json is an array of the top players by points: [{ username, points }, ...].
 ```
 
+
 ### Game Action Flow
 
+All in-game messages travel over the live connection as `REQ_GAME_ACTION` /
+`MSG_GAME_ACTION` JSON payloads; the `action` field names the event. A match
+plays out as the sequence of exchanges below.
+
+#### Match start
+
 ```
-[game_start] → server starts Ophanim sequence / chair selection
-
-
--- Chair selection --
-
-Client  → choose_chair    { action, color }
-Server  → chair_taken     { action, color, user_id, username }
-Server  → chairs_locked   { action }
-
-
--- Initiative sequence --
-
-Server  → initiative_sequence { action, turn_order:[user_id,...],
-                                item_grants:[{user_id, items:[...]},...],
-                                golden_squares:[sq,sq,sq,sq] }
-
-
--- Normal turn --
-
-Server  → turn_start      { action, user_id }
-Client  → roll_dice       { action, die1, die2 }
-Server  → dice_result     { action, user_id, die1, die2, total,
-                            moveable_pieces:[0-3,...],
-                            can_exit_house:bool,
-                            is_doubles:bool,
-                            consecutive_doubles:N }
-                           (empty moveable_pieces: server auto-skips)
-
-Client  → move_piece      { action, piece_id }
-Server  → piece_moved     { action, user_id, piece_id, from, to, steps,
-                            is_exit:bool, on_safe_square:bool }
-
-
--- Follow-up events (after piece_moved) --
-
-Server  → capture              { action, attacker_user_id, victim_user_id,
-                                 victim_piece_id, square, bonus_movements:20 }
-Server  → goal_scored          { action, user_id, piece_id,
-                                 pieces_in_goal:N, bonus_movements:10 }
-Server  → golden_square_event  { action, user_id, square,
-                                 spins:["gun"|"cigarette"|...|"reroll", ...],
-                                 final_item:"<one of the item names>" }
-Server  → barrier_formed       { action, user_id, square, piece_ids:[a,b] }
-Server  → barrier_broken       { action, user_id, square, reason:"moved" }
-
-
--- Extra turn --
-
-Server  → extra_turn      { action, user_id, reason:"doubles"|
-                            "capture_bonus"|"goal_bonus", pending_movements:N }
-           doubles   → continues with new turn_start (same user_id)
-           bonus     → player moves pending_movements extra points
-
-NOTE on the 5+X exit + capture case: the second die (X) is consumed BEFORE the
-capture bonus. The server emits dice_result(die1=X, die2=0) first; the
-extra_turn(capture_bonus, pending_movements=20) is fired after that move.
-
-
--- Triple doubles penalty --
-
-Server  → triple_double_penalty { action, user_id, piece_id }
-Server  → life_lost             { action, user_id, lives_remaining,
-                                  reason:"timeout"|"triple_double" }
-Server  → turn_end              { action, user_id, next_user_id }
-Server  → turn_start            { action, user_id }   ← next player
-
-
--- Normal turn end --
-
-Server  → turn_end        { action, user_id, next_user_id }
-Server  → turn_start      { action, user_id }
-
-
--- Handcuff skip (in place of turn_start) --
-
-Server  → handcuff_skip   { action, user_id }
-
-
--- Turn timer --
-
-Server  → turn_timer_warning  { action, user_id, seconds_remaining }
-Server  → turn_timer_expired  { action, user_id }
-
-
--- Item use: Handcuffs (IMPLEMENTED) --
-
-Client  → use_handcuffs        { action, target_user_id }
-Server  → handcuffs_applied    { action, attacker_user_id, target_user_id }
-        Cuffs fly from the attacker's table spot to the target's head and hover
-        there until the target's next turn.
-
-        On the target's next advance_turn, the server emits handcuff_skip in place
-        of turn_start (see "Handcuff skip" above). Ophanim says "TOO BAD..." on
-        all clients; the cuffs burn off the target's head.
-
-
--- Item use: Cigarette (IMPLEMENTED) --
-
-Client  → use_cigarette        { action }
-Server  → cigarette_result     { action, user_id, die1, die2, total,
-                                 moveable_pieces:[0-3,...] }
-        Replaces the pending dice. If moveable_pieces is empty:
-          - non-doubles → server auto-passes the turn (advance_turn) so the
-            player isn't stranded on the clock and the cubilete moves on.
-          - doubles     → extra_turn + new turn_start (reroll granted).
-        Ophanim says "FAIR ENOUGH." and shoots a reroll ray to the cup.
-
-
--- Item use: Fire Axe (STUB) --                        [TOBEDONE - server + client]
-
-Client  → use_fire_axe         { action, target_square }
-Server  → barrier_destroyed    { action, attacker_user_id, square,
-                                 freed_pieces:[{user_id, piece_id}, ...] }
-        Both pieces of the targeted enemy barrier are sent back home.
-        Consumes the axe.
-
-  Server-side stub: handle_use_fire_axe in game_actions.c.
-  Client-side stub: FireAxe.cs has grab/return + BurnDisappear() + ResetToFresh().
-                    Targeting UI (pick an enemy barrier square) is not implemented.
-
-
--- Item use: Magnifying Glass (STUB) --                [TOBEDONE - server + client]
-
-Client  → use_magnifying_glass { action }
-Server  → magnifying_glass_used { action, user_id }           (public)
-Server  → peek_result           { action, die1, die2 }        (private — to peeker only)
-        Pre-rolls the next dice without committing them, so the peeker can decide
-        whether to use a Cigarette before the actual roll. Consumes the glass.
-
-  Server-side stub: handle_use_magnifying_glass in game_actions.c.
-  Client-side stub: MagnifyingGlass.cs has BurnDisappear() + ResetToFresh().
-                    No grab/peek UI yet.
-
-
--- Item use: Makarov / gun (STUB) --                   [TOBEDONE - server + client]
-
-Client  → use_gun              { action, target_user_id }
-Server  → gun_result           { action, attacker_user_id, target_user_id,
-                                 result:"bang"|"click", lives_remaining:N }
-        Russian-roulette shot at a target, ignoring safe squares.
-          - "bang"  → target loses a life (life_lost follows; may trigger
-                      player_eliminated if lives_remaining == 0).
-          - "click" → nothing happens.
-        Consumes the gun.
-
-  Server-side stub: handle_use_gun in game_actions.c. (The gun IS used by the
-                    initiative sequence — that path is implemented.)
-  Client-side stub: Gun.cs has grab/shoot/return + BurnDisappear() + ResetToFresh().
-                    No target-selection UI yet.
-
-
--- Player elimination --
-
-Server  → player_eliminated { action, user_id }
-
-
--- Game over --
-
-Server  → game_over       { action, reason:"race", winner_user_id }
+game_start → server begins the Ophanim sequence and chair selection
 ```
+
+#### Chair selection
+
+```
+Client → choose_chair   { action, color }
+Server → chair_taken    { action, color, user_id, username }
+Server → chairs_locked  { action }
+```
+
+#### Initiative sequence
+
+```
+Server → initiative_sequence {
+           action,
+           turn_order:     [user_id, ...],
+           item_grants:    [{ user_id, items:[...] }, ...],
+           golden_squares: [sq, sq, sq, sq]
+         }
+```
+
+#### Normal turn
+
+```
+Server → turn_start    { action, user_id }
+Client → roll_dice     { action, die1, die2 }
+Server → dice_result   { action, user_id, die1, die2, total,
+                         moveable_pieces:[0-3,...], can_exit_house:bool,
+                         is_doubles:bool, consecutive_doubles:N }
+                         (empty moveable_pieces → server auto-skips the turn)
+Client → move_piece    { action, piece_id }
+Server → piece_moved   { action, user_id, piece_id, from, to, steps,
+                         is_exit:bool, on_safe_square:bool }
+```
+
+#### Follow-up events (after `piece_moved`)
+
+```
+Server → capture              { action, attacker_user_id, victim_user_id,
+                                victim_piece_id, square, bonus_movements:20 }
+Server → goal_scored          { action, user_id, piece_id,
+                                pieces_in_goal:N, bonus_movements:10 }
+Server → golden_square_event  { action, user_id, square,
+                                spins:["gun"|"cigarette"|...|"reroll", ...],
+                                final_item:"<item name>" }
+Server → barrier_formed       { action, user_id, square, piece_ids:[a,b] }
+Server → barrier_broken       { action, user_id, square, reason:"moved" }
+```
+
+#### Extra turns
+
+```
+Server → extra_turn  { action, user_id,
+                       reason:"doubles"|"capture_bonus"|"goal_bonus",
+                       pending_movements:N }
+                       doubles → continues with a new turn_start (same user_id)
+                       bonus   → player moves pending_movements extra points
+```
+
+> **5 + X exit + capture:** the second die (X) is consumed *before* the capture
+> bonus. The server emits `dice_result(die1=X, die2=0)` first, then fires
+> `extra_turn(capture_bonus, pending_movements=20)` after that move.
+
+#### Triple doubles penalty
+
+```
+Server → triple_double_penalty { action, user_id, piece_id }
+Server → life_lost             { action, user_id, lives_remaining,
+                                 reason:"timeout"|"triple_double" }
+Server → turn_end              { action, user_id, next_user_id }
+Server → turn_start            { action, user_id }    ← next player
+```
+
+#### Turn end
+
+```
+Server → turn_end    { action, user_id, next_user_id }
+Server → turn_start  { action, user_id }
+```
+
+> If the next player is handcuffed, the server emits
+> `handcuff_skip { action, user_id }` in place of `turn_start`.
+
+#### Turn timer
+
+```
+Server → turn_timer_warning  { action, user_id, seconds_remaining }
+Server → turn_timer_expired  { action, user_id }
+```
+
+#### Item — Handcuffs
+
+```
+Client → use_handcuffs      { action, target_user_id }
+Server → handcuffs_applied  { action, attacker_user_id, target_user_id }
+```
+
+The cuffs fly to the target's head and hover until their next turn, when the
+server emits `handcuff_skip` instead of `turn_start`.
+
+#### Item — Cigarette
+
+```
+Client → use_cigarette     { action }
+Server → cigarette_result  { action, user_id, die1, die2, total,
+                             moveable_pieces:[0-3,...] }
+```
+
+Replaces the pending dice. If `moveable_pieces` is empty: non-doubles auto-passes
+the turn; doubles grants an `extra_turn` + new `turn_start`.
+
+#### Item — Fire Axe
+
+```
+Client → use_fire_axe       { action, target_square }
+Server → barrier_destroyed  { action, attacker_user_id, square,
+                              freed_pieces:[{ user_id, piece_id }, ...] }
+```
+
+Both pieces of the targeted enemy barrier are sent home. Consumes the axe.
+
+#### Item — Magnifying Glass
+
+```
+Client → use_magnifying_glass   { action }
+Server → magnifying_glass_used  { action, user_id }       (public)
+Server → peek_result            { action, die1, die2 }    (private — peeker only)
+```
+
+Pre-rolls the next dice without committing them, so the peeker can decide whether
+to use a Cigarette before the real roll. Consumes the glass.
+
+#### Item — Makarov
+
+```
+Client → use_gun     { action, target_user_id }
+Server → gun_result  { action, attacker_user_id, target_user_id,
+                       result:"bang"|"click", lives_remaining:N }
+```
+
+A `bang` makes the target lose a life (`life_lost` follows, possibly
+`player_eliminated`); a `click` does nothing. Ignores safe squares. Consumes the gun.
+
+#### Match conclusion
+
+```
+Server → player_eliminated  { action, user_id }
+Server → game_over          { action, reason:"race"|"elimination", winner_user_id }
+```
+
 
 ---
 
