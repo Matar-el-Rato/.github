@@ -22,14 +22,20 @@
   <a href="#authors">Authors</a>
 </p>
 
-[IMAGES - game screenshot]
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <!-- Paste a screenshot here, e.g. <img src="PASTE_URL" width="100%" alt="Gameplay" /> -->
+    </td>
+    <td width="50%" align="center">
+      <!-- Paste a screenshot here, e.g. <img src="PASTE_URL" width="100%" alt="Gameplay" /> -->
+    </td>
+  </tr>
+</table>
 
 <img width="128" height="130" alt="logo_gihub" src="https://github.com/user-attachments/assets/2ff17769-64db-401e-af6c-8f6c7e503ae7" />
 
 A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice, move their four pieces around the board, and compete to be the first to get all four pieces to their goal. Each match is overseen by **Ophanim**, a supernatural dealer who presides over the initiative sequence, the golden square roulette, and the Sword of Damocles — a turn timer enforced by a falling blade.
-
-Source code: [github.com/Matar-el-Rato](https://github.com/Matar-el-Rato)  
-Latest video: [youtu.be/it1Uf9Nida0](https://youtu.be/it1Uf9Nida0)
 
 ---
 
@@ -43,6 +49,17 @@ Latest video: [youtu.be/it1Uf9Nida0](https://youtu.be/it1Uf9Nida0)
 
 - **View:** Isometric view (Isoview)
 - **POV:** In-game point of view
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <!-- Paste an environment/UI shot here, e.g. <img src="PASTE_URL" width="100%" alt="Environment" /> -->
+    </td>
+    <td width="50%" align="center">
+      <!-- Paste an environment/UI shot here, e.g. <img src="PASTE_URL" width="100%" alt="UI" /> -->
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -118,19 +135,15 @@ At the start of each turn, Ophanim hangs a sword above the board on a thin rope.
 
 ## Items & Abilities
 
-[IMAGES - items]
+Items are acquired through the golden square roulette. A player can hold multiple items at once.
 
-| Item | Protocol name | Effect | Status | Image |
-|------|---------------|--------|--------|-------|
-| Handcuffs | `handcuffs` | Skip an opponent's next turn | **Implemented** (client + server) | <img width="256" height="256" alt="esposas" src="https://github.com/user-attachments/assets/af9cc6ae-30ac-44fe-8a3c-28752c83a3ac" /> |
-| Cigarette | `cigarette` | Reroll the pending dice | **Implemented** (client + server) | <img width="256" height="256" alt="cigs" src="https://github.com/user-attachments/assets/4cf76e80-085b-4033-817d-c3547a70837d" /> |
-| Fire Axe | `fire_axe` | Destroy one enemy barrier | Stub — grab/return + safe consume-and-respawn scaffold in place; no use logic | <img width="256" height="256" alt="hacha" src="https://github.com/user-attachments/assets/0e58c345-30f4-48a7-800a-aeeaddaf692f" /> |
-| Magnifying Glass | `magnifying_glass` | Peek at the next dice result before rolling | Stub — safe consume-and-respawn scaffold in place; no use logic | <img width="256" height="256" alt="lupa" src="https://github.com/user-attachments/assets/686ccfb0-691f-46b3-951b-e556cdb84ca0" /> |
-| Makarov | `gun` | Russian-roulette shot at a target — ignores safe squares | Stub — grab/shoot/return + safe consume-and-respawn scaffold in place; gun is used by the initiative sequence | <img width="256" height="256" alt="makarov" src="https://github.com/user-attachments/assets/58121435-910f-4634-9cd7-c0c432f1e1e5" /> |
-
-Items are acquired through the golden square roulette. A player can hold multiple items.
-
-**Consume/respawn rule:** when an item is used, its scene node is NOT freed — it's reset to a hidden "fresh" pose (visible=false, transform restored). `PlayerItemSet.SpawnItem` resolves items by node name, so freeing the node would make any subsequent grant from the golden roulette fail with `'<ItemName>' not found in PlayerItemSet`. All five items follow this pattern via `BurnDisappear()` → `ResetToFresh()`.
+| Item | Protocol name | Effect | |
+|------|---------------|--------|:--:|
+| **Handcuffs** | `handcuffs` | Skip an opponent's next turn | <img width="96" alt="handcuffs" src="https://github.com/user-attachments/assets/af9cc6ae-30ac-44fe-8a3c-28752c83a3ac" /> |
+| **Cigarette** | `cigarette` | Reroll the pending dice | <img width="96" alt="cigarette" src="https://github.com/user-attachments/assets/4cf76e80-085b-4033-817d-c3547a70837d" /> |
+| **Fire Axe** | `fire_axe` | Destroy one enemy barrier | <img width="96" alt="fire axe" src="https://github.com/user-attachments/assets/0e58c345-30f4-48a7-800a-aeeaddaf692f" /> |
+| **Magnifying Glass** | `magnifying_glass` | Peek at the next dice result before rolling | <img width="96" alt="magnifying glass" src="https://github.com/user-attachments/assets/686ccfb0-691f-46b3-951b-e556cdb84ca0" /> |
+| **Makarov** | `gun` | Russian-roulette shot at a target — ignores safe squares | <img width="96" alt="makarov" src="https://github.com/user-attachments/assets/58121435-910f-4634-9cd7-c0c432f1e1e5" /> |
 
 ---
 
@@ -140,28 +153,32 @@ Server: `bolty.website:8888` (TCP)
 
 ### Request Types (Client → Server)
 
-| Code | Name | Status |
-|------|------|--------|
-| 1 | REQ_REGISTER | Done |
-| 2 | REQ_LOGIN | Done |
-| 3 | REQ_CHANGE_SKIN | Done |
-| 4 | REQ_LOGOUT | Done |
-| 5 | REQ_JOIN_ROOM | Done |
-| 6 | REQ_SEND_CHAT | Done |
-| 7 | REQ_GAME_ACTION | Done |
-| 8 | REQ_LEAVE_ROOM | Done |
-| 9 | REQ_CONNECT_LIVE | Done |
+| Code | Name | Purpose |
+|:----:|------|---------|
+| 1 | `REQ_REGISTER` | Create an account |
+| 2 | `REQ_LOGIN` | Authenticate |
+| 3 | `REQ_CHANGE_SKIN` | Persist the chosen character skin |
+| 4 | `REQ_LOGOUT` | Graceful logout |
+| 5 | `REQ_JOIN_ROOM` | Enter a room (1–3) |
+| 6 | `REQ_SEND_CHAT` | Send a chat message |
+| 7 | `REQ_GAME_ACTION` | Perform an in-game action |
+| 8 | `REQ_LEAVE_ROOM` | Return to the lobby |
+| 9 | `REQ_CONNECT_LIVE` | Open the persistent push connection |
+| 13 | `REQ_READY` | Mark ready; starts the countdown when all are ready |
+| 16 | `REQ_UNREADY` | Cancel ready before the countdown begins |
+| 18 | `REQ_GET_HISTORY` | Fetch a player's match history |
+| 19 | `REQ_GET_LEADERBOARD` | Fetch the global points leaderboard |
 
 ### Push Message Types (Server → Client)
 
-| Code | Name |
-|------|------|
-| 10 | MSG_USER_LIST |
-| 11 | MSG_CHAT |
-| 12 | MSG_ROOM_STATE |
-| 13 | MSG_COUNTDOWN |
-| 14 | MSG_GAME_START |
-| 17 | MSG_GAME_ACTION |
+| Code | Name | Purpose |
+|:----:|------|---------|
+| 10 | `MSG_USER_LIST` | Connected-players list |
+| 11 | `MSG_CHAT` | Chat broadcast |
+| 12 | `MSG_ROOM_STATE` | Room occupancy update |
+| 14 | `MSG_COUNTDOWN` | Pre-game countdown tick |
+| 15 | `MSG_GAME_START` | Match is starting |
+| 17 | `MSG_GAME_ACTION` | Game action result |
 
 ### Response Codes
 
@@ -282,6 +299,29 @@ Server → Client:
   [type 1B][payload_len 2B big-endian][payload N bytes JSON]
 
 The "action" field in JSON identifies the event.
+```
+
+**REQ_GET_HISTORY (18)**
+```
+Client → 13 bytes:
+  [type 1B][username 12B ASCII]
+
+Server → variable:
+  [code 1B][json_len 4B big-endian][json N bytes]
+
+json is an array of the player's matches (newest first), each with room,
+status, start/end times, duration, winner and the full finishing order.
+```
+
+**REQ_GET_LEADERBOARD (19)**
+```
+Client → 1 byte:
+  [type 1B]
+
+Server → variable:
+  [code 1B][json_len 4B big-endian][json N bytes]
+
+json is an array of the top players by points: [{ username, points }, ...].
 ```
 
 ### Game Action Flow
