@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="#project-structure">Project Structure</a> ·
   <a href="#installation">Installation</a> ·
   <a href="#physical-layer">Physical Layer</a> ·
   <a href="#ui">UI</a> ·
@@ -47,6 +48,20 @@
 </table>
 
 A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice, move their four pieces around the board, and compete to be the first to get all four pieces to their goal. Each match is overseen by **Ophanim**, a supernatural dealer who presides over the initiative sequence, the golden square roulette, and the Sword of Damocles — a turn timer enforced by a falling blade.
+
+---
+
+## Project Structure
+
+The project is split across three repositories under the [**Matar-el-Rato**](https://github.com/Matar-el-Rato) organization:
+
+| Repository | Language | Role |
+|------------|----------|------|
+| [**MatarelRato-Godot**](https://github.com/Matar-el-Rato/MatarelRato-Godot) | C# (Godot 4.6) | The 3D game client — rendering, gameplay, UI and the networking layer that talks to the server. This is what players download and run. |
+| [**MER-Server**](https://github.com/Matar-el-Rato/MER-Server) | C | The authoritative multiplayer server — accounts, rooms, match orchestration, the full Parchís rules engine and the MySQL persistence layer. |
+| [**Version0-WinForms**](https://github.com/Matar-el-Rato/Version0-WinForms) | C# (WinForms) | The original prototype client. **Left behind and kept only for debugging** — it speaks the same wire protocol, so it's handy for poking at the server without launching the full 3D client. Not maintained for end users. |
+
+The Godot client and the C server communicate over a custom TCP protocol (see [Protocol](#protocol)).
 
 ---
 
@@ -512,7 +527,7 @@ Server → game_over          { action, reason:"race"|"elimination", winner_user
 
 ## Database
 
-MySQL database `matarelrato-db`. Schema in [`utils/schema.sql`](https://github.com/Matar-el-Rato/MER-Server/blob/main/utils/schema.sql).
+MySQL database `matarelrato-db`. Schema in [`utils/schema.sql`](utils/schema.sql).
 
 ### `users`
 Permanent account data. Everyone starts at **500 points**; a win awards **+100**, a loss **−50** (floored at 0).
