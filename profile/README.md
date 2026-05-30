@@ -90,7 +90,7 @@ The Windows client is packaged with **[Inno Setup](https://jrsoftware.org/isinfo
 
 ### Turn Flow
 
-At the start of each turn the current player rolls two dice and moves one piece by the combined total. If no legal moves exist, the turn is skipped automatically. After the first piece moves anywhere in the match, a **30-second turn timer** begins. Warnings are broadcast at 30, 10, and 5 seconds remaining. If the timer expires, the Sword of Damocles falls.
+At the start of each turn the current player rolls two dice and moves one piece by the combined total. If no legal moves exist, the turn is skipped automatically. After the first piece moves anywhere in the match, a **30-second turn timer** begins. Warnings are broadcast at 20, 10, and 5 seconds remaining. If the timer expires, the Sword of Damocles falls.
 
 ### Board Layout
 
@@ -105,7 +105,7 @@ The board has an outer ring (squares 1–68) and four color-specific goal corrid
 | Green corridor | 131 – 138 | 138 |
 
 **Exit squares:** Yellow 5 · Blue 22 · Red 39 · Green 56  
-**Universal safe squares:** 1, 12, 17, 29, 34, 46, 51, 63, 68
+**Universal safe squares:** 5, 12, 17, 22, 29, 34, 39, 46, 51, 56, 63 (the four exit squares are also safe)
 
 ### Captures
 <img src="https://github.com/user-attachments/assets/4d28e0e6-4c21-4526-8264-c1fa971908a8" align="right" width="120" alt="Captures">
@@ -144,14 +144,14 @@ Each player starts with 3 lives. Reaching zero lives eliminates that player from
 
 ### Golden Squares
 <img src="https://github.com/user-attachments/assets/bab4988e-a613-42f5-af8a-213f4ccee487" align="right" width="120" alt="Golden Squares">
-Each color quadrant has one golden square. Landing on it triggers a roulette spin presided over by Ophanim. The outcome is either an item grant or nothing ("click"). The Damocles sword is dismissed during this sequence and respawns on the next turn.
+Each color quadrant has one golden square. Landing on it triggers a roulette spin presided over by Ophanim. The angel will grant an item the player doesn't already hold. 
 <br clear="all" />
 
 ---
 
 ### Sword of Damocles
 <img src="https://github.com/user-attachments/assets/b1c0426e-246c-48b5-a0a0-7744708fa63b" align="right" width="120" alt="Sword of Damocles">
-At the start of each turn, Ophanim hangs a sword above the board on a thin rope. The sword swings with spring physics throughout the turn as a visible countdown. If the 30-second timer expires, the rope is cut and the sword falls and impales the board. Once the next dice roll lands, the sword is dismissed. The timer only arms after the first piece move of the entire match, so it never runs during the opening Ophanim sequence.
+At the start of each turn, Ophanim hangs a sword above the board on a thin rope. The sword swings with spring physics throughout the turn as a visible countdown. If the 30-second timer expires, the rope is cut and the sword falls and impales the board. Once the next player is up, the sword is dismissed. The timer only arms after the first piece move of the entire match, so it never runs during the opening Ophanim sequence.
 <br clear="all" />
 
 ---
@@ -184,7 +184,7 @@ Server: `bolty.website:8888` (TCP)
 | 4 | `REQ_LOGOUT` | Graceful logout |
 | 5 | `REQ_JOIN_ROOM` | Enter a room (1–3) |
 | 6 | `REQ_SEND_CHAT` | Send a chat message |
-| 7 | `REQ_GAME_ACTION` | Perform an in-game action |
+| 7 | `REQ_GAME_ACTION` | Perform an in-game action (.json structs)|
 | 8 | `REQ_LEAVE_ROOM` | Return to the lobby |
 | 9 | `REQ_CONNECT_LIVE` | Open the persistent push connection |
 | 13 | `REQ_READY` | Mark ready; starts the countdown when all are ready |
