@@ -512,7 +512,7 @@ Server → game_over          { action, reason:"race"|"elimination", winner_user
 
 ## Database
 
-MySQL database `matarelrato-db`. Schema in [`utils/schema.sql`](utils/schema.sql).
+MySQL database `matarelrato-db`. Schema in [`utils/schema.sql`](https://github.com/Matar-el-Rato/MER-Server/blob/main/utils/schema.sql).
 
 ### `users`
 Permanent account data. Everyone starts at **500 points**; a win awards **+100**, a loss **−50** (floored at 0).
