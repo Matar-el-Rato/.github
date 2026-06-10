@@ -51,6 +51,13 @@ A multiplayer 3D Parchís-style board game for 2–4 players. Players roll dice,
 
 ---
 
+<div align="center">
+  <a href="https://youtu.be/eyc2c3YH0Xk?si=LHW-ZbowooNUy4s1">
+    <img src="https://img.shields.io/badge/Watch%20on-YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch on YouTube" height="50">
+  </a>
+</div>
+
+---
 ## Project Structure
 
 The project is split across three repositories under the [**Matar-el-Rato**](https://github.com/Matar-el-Rato) organization:
